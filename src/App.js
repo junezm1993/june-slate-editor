@@ -1,9 +1,9 @@
 import { Button } from 'antd';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       this is react app<Button>aaa</Button>
     </div>
   );
