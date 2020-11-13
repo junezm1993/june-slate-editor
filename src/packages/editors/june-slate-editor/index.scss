@@ -1,0 +1,54 @@
+@media only screen and (max-width: 1440px) {
+  .editor-wrapper {
+    min-width: 1280px;
+  }
+}
+
+.editor-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  transition: height 0.25s cubic-bezier(0.3, 1.2, 0.2, 1);
+
+  .editor-toolbar {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    padding: 0;
+    line-height: 1.5;
+    background: #fcfcfc;
+    border-bottom: 1px solid #e8e8e8;
+    transition: all 0.25s cubic-bezier(0.3, 1.2, 0.2, 1);
+    z-index: 200;
+    user-select: none;
+  }
+
+  .editor-content-container {
+    width: 100%;
+    height: calc(100% - 40px);
+    overflow: auto;
+
+    .editor-content {
+      position: relative;
+      margin: 10px auto 64px;
+      padding: 16px 0 64px 0;
+      background: #ffffff;
+      width: 874px;
+      font-family: 'Tahoma For Number', 'Chinese Quote', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #262626;
+      cursor: text;
+      white-space: normal;
+      border: 1px solid #e8e8e8;
+      box-shadow: 0 2px 8px rgba(115, 115, 115, 0.08);
+
+      .editor-core {
+        position: relative;
+        background-color: transparent;
+        min-height: 1024px;
+        padding: 20px 60px 90px 60px;
+      }
+    }
+  }
+}
