@@ -23,7 +23,6 @@ const DefaultElement = props => {
 // 个性化leaf节点
 export const RenderLeaf = (props) => {
   let { attributes, children, leaf } =  props;
-  console.log(leaf);
   // 加粗
   if (leaf.bold) {
     children = <strong>{children}</strong>
