@@ -1,8 +1,16 @@
 import React from "react";
 import { Editor } from "slate";
 import { useSlate } from "slate-react";
-import { BoldOutlined } from '@ant-design/icons';
-import { BOLD_TYPE } from '../plugins/bold/index';
+import {
+  BoldOutlined,
+  ItalicOutlined,
+  QuestionOutlined,
+  UnderlineOutlined,
+  StrikethroughOutlined,
+  CodeOutlined,
+} from '@ant-design/icons';
+import { BOLD_TYPE, CODE_TYPE, ITALIC_TYPE, STRIKETHROUGH_TYPE, UNDERLINE_TYPE } from '../plugins/plugin-types';
+
 
 const MarkButton = ({ format }) => {
   const editor = useSlate();
@@ -27,8 +35,16 @@ const MarkButton = ({ format }) => {
     switch(props.format) {
       case BOLD_TYPE:
         return <BoldOutlined />;
+      case ITALIC_TYPE:
+        return <ItalicOutlined />;
+      case UNDERLINE_TYPE:
+        return <UnderlineOutlined />;
+      case STRIKETHROUGH_TYPE:
+        return <StrikethroughOutlined />;
+      case CODE_TYPE:
+        return <CodeOutlined />;
       default:
-        return 'You are a User';
+        return <QuestionOutlined />;
     }
   }
 

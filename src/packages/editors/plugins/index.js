@@ -1,14 +1,16 @@
 import React from 'react'
 import { CodeElement, CodeLeaf } from './inline-code';
-import { BoldElement, BoldLeaf } from './bold';
+import { BoldElement, BoldLeaf,  } from './bold';
+import { ItalicElement, ItalicLeaf } from './italic';
+import { BOLD_TYPE, ITALIC_TYPE, UNDERLINE_TYPE } from './plugin-types';
 
 // 个性化block节点
 export const RenderElement = (props) => {
   switch (props.element.type) {
-    case 'code':
-      return <CodeElement {...props} />;
-    case 'bold':
+    case BOLD_TYPE:
       return <BoldElement {...props} />;
+    case ITALIC_TYPE:
+      return <ItalicElement {...props} />;
     default:
       return <DefaultElement {...props}/>;
   }
@@ -20,13 +22,30 @@ const DefaultElement = props => {
 
 // 个性化leaf节点
 export const RenderLeaf = (props) => {
-  if(props.leaf.bold) {
-    return <BoldLeaf {...props} />;
+  let { attributes, children, leaf } =  props;
+  console.log(leaf);
+  // 加粗
+  if (leaf.bold) {
+    children = <strong>{children}</strong>
   }
-  if(props.leaf.code) {
-    return <CodeLeaf {...props} />;
+  // 斜体
+  if (leaf.italic) {
+    children = <em>{children}</em>
   }
-  return <DefaultLeaf {...props} />;
+  // 中划线
+  if (leaf.strikethrough) {
+    children = <del>{children}</del>
+  }
+  // 下划线
+  if (leaf.underline) {
+    children = <u>{children}</u>
+  }
+  // 行内代码
+  if (leaf.code) {
+    children = <code>{children}</code>
+  }
+
+  return <span {...attributes}>{children}</span>
 };
 
 const DefaultLeaf = props => {

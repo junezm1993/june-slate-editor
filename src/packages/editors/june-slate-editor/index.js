@@ -1,8 +1,6 @@
 import React, { useMemo, useState, useCallback } from "react";
-import { Editor, createEditor } from "slate";
+import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
-import { Button } from "antd";
-import { BoldOutlined } from '@ant-design/icons';
 import './index.scss';
 import Toolbar from '../toolbar';
 import { RenderElement, RenderLeaf } from '../plugins/index';
@@ -45,18 +43,3 @@ const EditorComponent = () => {
 };
 
 export default EditorComponent;
-
-const toggleMark = (editor, format) => {
-  const isActive = isMarkActive(editor, format);
-
-  if (isActive) {
-    Editor.removeMark(editor, format)
-  } else {
-    Editor.addMark(editor, format, true)
-  }
-};
-
-const isMarkActive = (editor, format) => {
-  const marks = Editor.marks(editor);
-  return marks ? marks[format] === true : false
-};
