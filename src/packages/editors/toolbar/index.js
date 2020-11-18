@@ -1,11 +1,15 @@
 // 工具栏 1.mark工具栏  2.block工具栏
 import React from "react";
-import {BOLD_TYPE, CODE_TYPE, ITALIC_TYPE, STRIKETHROUGH_TYPE, UNDERLINE_TYPE} from '../plugins/plugin-types';
+import {BOLD_TYPE, CODE_TYPE, ITALIC_TYPE, STRIKETHROUGH_TYPE, UNDERLINE_TYPE, H1} from '../plugins/plugin-types';
 
 import MarkButton from "./mark-button";
+import BlockButton from "./block-button";
 
 const Toolbar = () => {
   return <>
+    <div className="editor-toolbar-item">
+      <BlockButton format={H1} />
+    </div>
     <div className="editor-toolbar-item">
       <MarkButton format={BOLD_TYPE} />
       <MarkButton format={ITALIC_TYPE} />
