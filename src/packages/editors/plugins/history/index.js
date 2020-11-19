@@ -31,33 +31,22 @@ export default {
             editor.undo();
           }}
         >
-          <UndoOutlined />
+          <UndoOutlined disabled={history.undos.length < 2}/>
         </div>
         </Tooltip>
-        <button
-          type="button"
-          key="undo"
-          disabled={history.undos.length < 2}
-          data-title={config.title.undo}
-          className="slate-toolbar-item"
-          onMouseDown={(e) => {
-            e.preventDefault();
-            editor.undo();
-          }}>
-          <i className="bfi-undo"></i>
-        </button>
-        <button
-          type="button"
-          key="redo"
-          disabled={history.redos.length === 0}
-          data-title={config.title.redo}
-          className="slate-toolbar-item"
-          onMouseDown={(e) => {
-            e.preventDefault();
+        <Tooltip
+          placement="bottom"
+          title={config.title.redo}
+        ><div
+          className="toolbar-mark-button"
+          onMouseDown={event => {
+            event.preventDefault();
             editor.redo();
-          }}>
-          <i className="bfi-redo"></i>
-        </button>
+          }}
+        >
+          <RedoOutlined disabled={history.redos.length === 0}/>
+        </div>
+        </Tooltip>
       </>
     );
   })
