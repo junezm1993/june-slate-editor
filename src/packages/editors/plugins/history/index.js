@@ -1,6 +1,7 @@
 import React from 'react';
-import { Editable, withReact, useSlate, Slate } from 'slate-react';
+import { useSlate } from 'slate-react';
 import { withHistory } from 'slate-history';
+import classnames from 'classnames';
 import { HISTORY, HISTORY_TYPES } from '../plugin-types';
 import {Tooltip} from "antd";
 import { UndoOutlined, RedoOutlined } from '@ant-design/icons';
@@ -25,26 +26,32 @@ const historyPlugin = {
           placement="bottom"
           title={config.title.undo}
         ><div
-          className="toolbar-mark-button"
+          className={classnames({
+            "editor-toolbar-item": true,
+            "editor-toolbar-item-disabled": history.undos.length < 2,
+          })}
           onMouseDown={event => {
             event.preventDefault();
             editor.undo();
           }}
         >
-          <UndoOutlined disabled={history.undos.length < 2}/>
+          <UndoOutlined />
         </div>
         </Tooltip>
         <Tooltip
           placement="bottom"
           title={config.title.redo}
         ><div
-          className="toolbar-mark-button"
+          className={classnames({
+            "editor-toolbar-item": true,
+            "editor-toolbar-item-disabled": history.redos.length === 0,
+          })}
           onMouseDown={event => {
             event.preventDefault();
             editor.redo();
           }}
         >
-          <RedoOutlined disabled={history.redos.length === 0}/>
+          <RedoOutlined />
         </div>
         </Tooltip>
       </>

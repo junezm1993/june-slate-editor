@@ -1,16 +1,21 @@
 import {useSlate} from "slate-react";
 import {Editor} from "slate";
-import {BOLD_TYPE, CODE_TYPE, ITALIC_TYPE, STRIKETHROUGH_TYPE, UNDERLINE_TYPE} from "../plugins/plugin-types";
+import {BOLD_TYPE, CODE_TYPE, ITALIC_TYPE, STRIKETHROUGH_TYPE, UNDERLINE_TYPE, SUPERSCRIPT_TYPE, SUBSCRIPT_TYPE} from "../plugins/plugin-types";
 import {
   BoldOutlined,
   CodeOutlined,
   ItalicOutlined,
   QuestionOutlined,
   StrikethroughOutlined,
-  UnderlineOutlined
+  UnderlineOutlined,
+  createFromIconfontCN,
 } from "@ant-design/icons";
 import React, {useMemo} from "react";
 import {Tooltip} from "antd";
+
+const IconFont = createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_2218973_0nxdm9knzbt.js',
+});
 
 const MarkButton = React.memo(({ format, title }) => {
   const editor = useSlate();
@@ -41,6 +46,10 @@ const MarkButton = React.memo(({ format, title }) => {
         return <UnderlineOutlined />;
       case STRIKETHROUGH_TYPE:
         return <StrikethroughOutlined />;
+      case SUPERSCRIPT_TYPE:
+        return <IconFont type="slate-shangbiao" />;
+      case SUBSCRIPT_TYPE:
+        return <IconFont type="slate-xiabiao" />;
       case CODE_TYPE:
         return <CodeOutlined />;
       default:
@@ -72,7 +81,7 @@ const MarkButton = React.memo(({ format, title }) => {
     placement="bottom"
     title={title}
   ><div
-    className="toolbar-mark-button"
+    className="editor-toolbar-item"
     onMouseDown={event => {
       event.preventDefault();
       toggleMark(editor, format)
@@ -99,6 +108,3 @@ export default ({ format, title, otherFormat, config, processLeaf }) => {
     })
   }
 }
-
-// export default MarkButton;
-

@@ -10,7 +10,7 @@ export const defaultPlugins = [
   'textColor',
   'bold',
   'italic',
-  'underlined',
+  'underline',
   'strikethrough',
   'line',
   'superscript',

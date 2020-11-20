@@ -15,7 +15,7 @@ function App() {
   }, []);
   return (
     <div className="app">
-        <EditorComponent value={value} onChange={onChange} plugins={['history', 'bold', 'italic']}/>
+        <EditorComponent value={value} onChange={onChange} />
     </div>
   );
 }

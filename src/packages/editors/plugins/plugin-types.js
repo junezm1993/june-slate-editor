@@ -3,6 +3,8 @@ export const BOLD_TYPE = 'bold';
 export const ITALIC_TYPE = 'italic';
 export const UNDERLINE_TYPE = 'underline';
 export const STRIKETHROUGH_TYPE = 'strikethrough';
+export const SUPERSCRIPT_TYPE = 'superscript';
+export const SUBSCRIPT_TYPE = 'subscript';
 export const CODE_TYPE = 'code';
 
 // block types
