@@ -1,11 +1,21 @@
 import EditorComponent from './packages/editors/june-slate-editor/index';
 import './App.scss';
-import React from "react";
+import React, { useState, useCallback } from "react";
 
 function App() {
+  const [value, setValue] = useState([
+    {
+      type: 'paragraph',
+      children: [{ text: 'abc' }]
+    }
+  ]);
+  const onChange = useCallback(function (val) {
+    // console.log('onChange', val);
+    setValue(val);
+  }, []);
   return (
     <div className="app">
-        <EditorComponent />
+        <EditorComponent value={value} onChange={onChange} plugins={['history', 'bold', 'italic']}/>
     </div>
   );
 }

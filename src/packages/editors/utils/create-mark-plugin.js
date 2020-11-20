@@ -86,13 +86,15 @@ const MarkButton = React.memo(({ format, title }) => {
 export default ({ format, title, otherFormat, config, processLeaf }) => {
   config = config || {};
   config.title = title;
+  config.key = format;
 
   return {
-    ...config,
-    ToolbarButton:  <MarkButton format={format} title={title}/>,
+    key: format,
+    config,
+    ToolbarButton: () => <MarkButton format={format} title={title}/>,
     processLeaf: processLeaf || (({ leaf, style}) => {
       if (leaf[format]) {
-        style[format] = leaf[format]
+        style[format] = leaf[format];
       }
     })
   }

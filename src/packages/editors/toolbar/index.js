@@ -24,10 +24,14 @@ export default React.memo(({ plugins }) => {
   return <>
     {
       plugins.map((plugin, index) => {
+        console.log(plugin);
         if (plugin === 'line') {
           return <span key={'line' + index} className="slate-toolbar-line" />;
         }
-        return <div key={index} config={plugin.config}/>
+        if (typeof plugin === 'string' && plugin !== 'line') {
+          return null;
+        }
+        return <plugin.ToolbarButton key={plugin.key} config={plugin.config} />;
       })
     }
     </>

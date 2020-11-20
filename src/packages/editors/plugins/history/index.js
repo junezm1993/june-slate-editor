@@ -5,7 +5,7 @@ import { HISTORY, HISTORY_TYPES } from '../plugin-types';
 import {Tooltip} from "antd";
 import { UndoOutlined, RedoOutlined } from '@ant-design/icons';
 
-export default {
+const historyPlugin = {
   key: HISTORY,
   config: {
     title: {
@@ -51,3 +51,5 @@ export default {
     );
   })
 };
+
+export default historyPlugin;

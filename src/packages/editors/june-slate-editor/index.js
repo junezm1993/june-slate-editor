@@ -10,7 +10,7 @@ import { defaultPlugins } from "../consts/default-plugins";
 import { RenderElement, RenderLeaf, pluginMap } from '../plugins/index';
 
 const EditorComponent = React.memo(({ className: _className, value, onChange, plugins: _plugins }) => {
-  const editor = useMemo(() => withReact(createEditor()), []);
+  // const editor = useMemo(() => withReact(createEditor()), []);
 
   const plugins = useMemo(() => {
     return _plugins.map((item) => {
@@ -23,6 +23,28 @@ const EditorComponent = React.memo(({ className: _className, value, onChange, pl
       }
     });
   }, [_plugins]);
+  console.log(plugins);
+  const [className, setClassName] = useState('');
+  const editor = useMemo(() => {
+    let editor = withReact(createEditor());
+    plugins.forEach(item => {
+      if (item.withEditor) {
+        editor = item.withEditor(editor);
+      }
+    });
+    let _className = className;
+    Object.defineProperty(editor, 'className', {
+      get() {
+        return _className;
+      },
+      set: function (value) {
+        _className = value;
+        setClassName(value);
+      }
+    });
+
+    return editor;
+  }, []);
 
   const renderElement = useCallback(props => <RenderElement {...props} plugins={plugins}/>, [])
   const renderLeaf = useCallback(props => <RenderLeaf {...props} plugins={plugins}/>, [])

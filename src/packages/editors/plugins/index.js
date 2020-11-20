@@ -4,7 +4,7 @@ import { BoldElement, BoldLeaf,  } from './bold';
 import { ItalicElement, ItalicLeaf } from './italic';
 import { HISTORY, PARAGRAPH, H1, H2, H3, H4, H5, H6 } from './plugin-types';
 
-import * as historyPlugin from './history';
+import historyPlugin from './history';
 
 import createMarkPlugin from '../utils/create-mark-plugin';
 
@@ -30,24 +30,24 @@ export const RenderElement = React.memo((props) => {
   return <p {...attributes}>{children}</p>;
 })
 
-
-
-
 // 个性化 leaf 节点
 export const RenderLeaf = React.memo((props) => {
   let { attributes, children, leaf, plugins } = props;
   const style = {};
+  const childMark = { children }
+  console.log(children);
   plugins.forEach((plugin) => {
     if (plugin.processLeaf) {
-      plugin.processLeaf({ attributes, children, leaf, style })
+      plugin.processLeaf({ attributes, children, leaf, style, childMark })
     }
   })
 
   if (leaf.key) {
     attributes.key = leaf.key;
   }
-
-  return <span {...attributes} style={style}>{children}</span>;
+  console.log(children);
+  debugger;
+  return <span {...attributes} style={style}>{childMark.children}</span>;
 });
 
 // 个性化block节点
@@ -120,9 +120,20 @@ export const pluginMap = {
   bold: createMarkPlugin({
     format: 'bold',
     title: '加粗',
-    processLeaf: ({ leaf, style }) => {
+    processLeaf: ({ leaf, style, childMark }) => {
       if (leaf.bold) {
+        childMark.children = <strong>{childMark.children}</strong>;
         style.fontWeight = 'bold';
+      }
+    }
+  }),
+  italic: createMarkPlugin({
+    format: 'italic',
+    title: '斜体',
+    processLeaf: ({ leaf, style, childMark }) => {
+      if (leaf.italic) {
+        childMark.children = <em>{childMark.children}</em>;
+        style.fontStyle = 'italic';
       }
     }
   }),
