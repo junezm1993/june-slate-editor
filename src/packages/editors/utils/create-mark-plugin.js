@@ -12,10 +12,7 @@ import {
 } from "@ant-design/icons";
 import React, {useMemo} from "react";
 import {Tooltip} from "antd";
-
-const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_2218973_0nxdm9knzbt.js',
-});
+import { IconFont } from '../utils/icon-font';
 
 const MarkButton = React.memo(({ format, title }) => {
   const editor = useSlate();
@@ -56,26 +53,6 @@ const MarkButton = React.memo(({ format, title }) => {
         return <QuestionOutlined />;
     }
   }
-
-  // /** 返回mark button 的 tips
-  //  * @return {string}
-  //  */
-  // const SwitchTips = useMemo(() => {
-  //   switch(format) {
-  //     case BOLD_TYPE:
-  //       return '粗体';
-  //     case ITALIC_TYPE:
-  //       return '斜体';
-  //     case UNDERLINE_TYPE:
-  //       return '下划线';
-  //     case STRIKETHROUGH_TYPE:
-  //       return '删除线';
-  //     case CODE_TYPE:
-  //       return '行内代码';
-  //     default:
-  //       return '';
-  //   }
-  // }, []);
 
   return <Tooltip
     placement="bottom"

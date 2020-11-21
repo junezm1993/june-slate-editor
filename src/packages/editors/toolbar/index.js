@@ -14,7 +14,7 @@ export default React.memo(({ plugins }) => {
           if (typeof plugin === 'string' && plugin !== 'line') {
           return null;
         }
-        return <plugin.ToolbarButton key={plugin.key} config={plugin.config} />;
+        return <plugin.ToolbarButton key={plugin.key} config={plugin.config} format={plugin.key}/>;
       })
     }
     </>

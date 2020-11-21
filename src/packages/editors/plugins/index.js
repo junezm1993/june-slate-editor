@@ -11,6 +11,7 @@ import {UnderlinePlugin} from "./underlined";
 import {StrikethroughPlugin} from "./strikethrough";
 import {SuperscriptPlugin} from "./superscript";
 import {SubscriptPlugin} from "./subscript";
+import {removeFormatPlugin} from "./remove-format";
 
 // 个性化block节点
 export const RenderElement = React.memo((props) => {
@@ -53,10 +54,11 @@ export const RenderLeaf = React.memo((props) => {
 // plugin map
 export const pluginMap = {
   [HISTORY]: historyPlugin,
+  removeFormat: removeFormatPlugin,
   bold: BoldPlugin,
   italic: ItalicPlugin,
   underline: UnderlinePlugin,
   strikethrough: StrikethroughPlugin,
   superscript: SuperscriptPlugin,
   subscript: SubscriptPlugin,
-}
+};
