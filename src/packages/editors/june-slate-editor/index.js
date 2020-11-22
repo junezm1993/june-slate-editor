@@ -49,6 +49,16 @@ const EditorComponent = React.memo(({ className: _className, value, onChange, pl
   const renderElement = useCallback(props => <RenderElement {...props} plugins={plugins}/>, [])
   const renderLeaf = useCallback(props => <RenderLeaf {...props} plugins={plugins}/>, [])
 
+  const handleMouseUp = useCallback(() => {
+    const { formatStatus, recordMark } = editor;
+    if (formatStatus === 1) {
+      console.log(recordMark);
+      Object.keys(recordMark).forEach(mark => {
+        editor.addMark(mark, recordMark[mark]);
+      })
+      editor.formatStatus = 0;
+    }
+  }, [])
   return (
     <Slate editor={editor} value={value} onChange={onChange}>
       <div className="editor-wrapper">
@@ -61,6 +71,7 @@ const EditorComponent = React.memo(({ className: _className, value, onChange, pl
               className="editor-core"
               renderElement={renderElement}
               renderLeaf={renderLeaf}
+              onMouseUp={handleMouseUp}
             />
           </div>
         </div>

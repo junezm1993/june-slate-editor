@@ -7,6 +7,10 @@ function App() {
     {
       type: 'paragraph',
       children: [{ text: 'abc' }]
+    },
+    {
+      type: 'paragraph',
+      children: [{ text: 'abcefghijklmn' }]
     }
   ]);
   const onChange = useCallback(function (val) {

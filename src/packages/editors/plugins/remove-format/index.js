@@ -1,7 +1,5 @@
-import createMarkPlugin from "../../utils/create-mark-plugin";
 import React from "react";
 import {useSlate} from "slate-react";
-import {UndoOutlined} from "@ant-design/icons";
 import {Tooltip} from "antd";
 import classnames from 'classnames';
 import {removeMark} from "../../utils/remove-mark";
@@ -13,7 +11,7 @@ export const removeFormatPlugin = {
     title: '清除样式'
   },
   ToolbarButton: ({ format, config }) => {
-    console.log(format);
+    // console.log(format);
     const editor = useSlate();
     return (
       <Tooltip

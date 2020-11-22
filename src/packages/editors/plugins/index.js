@@ -6,12 +6,12 @@ import { HISTORY, PARAGRAPH, H1, H2, H3, H4, H5, H6 } from './plugin-types';
 
 import historyPlugin from './history';
 
-import createMarkPlugin from '../utils/create-mark-plugin';
 import {UnderlinePlugin} from "./underlined";
 import {StrikethroughPlugin} from "./strikethrough";
 import {SuperscriptPlugin} from "./superscript";
 import {SubscriptPlugin} from "./subscript";
 import {removeFormatPlugin} from "./remove-format";
+import {paintFormatPlugin} from "./paint-format";
 
 // 个性化block节点
 export const RenderElement = React.memo((props) => {
@@ -54,6 +54,7 @@ export const RenderLeaf = React.memo((props) => {
 // plugin map
 export const pluginMap = {
   [HISTORY]: historyPlugin,
+  paintFormat: paintFormatPlugin,
   removeFormat: removeFormatPlugin,
   bold: BoldPlugin,
   italic: ItalicPlugin,

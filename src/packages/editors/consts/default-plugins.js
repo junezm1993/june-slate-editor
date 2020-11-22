@@ -2,6 +2,7 @@ import { HISTORY } from "./plugin-types";
 
 export const defaultPlugins = [
   HISTORY,
+  'paintFormat',
   'removeFormat',
   'line',
   'fontSize',
