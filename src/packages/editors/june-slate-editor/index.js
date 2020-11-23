@@ -1,13 +1,15 @@
-import React, { useMemo, useState, useCallback } from "react";
+import React, {useMemo, useState, useCallback, useRef} from "react";
 import PropTypes from 'prop-types';
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import merge from 'merge';
+import classnames from 'classnames';
 
 import './index.scss';
 import Toolbar from '../toolbar';
 import { defaultPlugins } from "../consts/default-plugins";
 import { RenderElement, RenderLeaf, pluginMap } from '../plugins/index';
+import {handlePaintFormat} from "../plugins/paint-format";
 
 const EditorComponent = React.memo(({ className: _className, value, onChange, plugins: _plugins }) => {
   // const editor = useMemo(() => withReact(createEditor()), []);
@@ -23,7 +25,7 @@ const EditorComponent = React.memo(({ className: _className, value, onChange, pl
       }
     });
   }, [_plugins]);
-  console.log(plugins);
+
   const [className, setClassName] = useState('');
   const editor = useMemo(() => {
     let editor = withReact(createEditor());
@@ -48,25 +50,23 @@ const EditorComponent = React.memo(({ className: _className, value, onChange, pl
 
   const renderElement = useCallback(props => <RenderElement {...props} plugins={plugins}/>, [])
   const renderLeaf = useCallback(props => <RenderLeaf {...props} plugins={plugins}/>, [])
+  // 格式刷的函数
+  const handleMouseUp = useCallback(() => handlePaintFormat({ editor, getEditorContainer}), []);
+  // editor ref
+  const containerNode = useRef(null);
+  const getEditorContainer = useCallback(() => containerNode.current, []);
 
-  const handleMouseUp = useCallback(() => {
-    const { formatStatus, recordMark } = editor;
-    if (formatStatus === 1) {
-      console.log(recordMark);
-      Object.keys(recordMark).forEach(mark => {
-        editor.addMark(mark, recordMark[mark]);
-      })
-      editor.formatStatus = 0;
-    }
-  }, [])
   return (
     <Slate editor={editor} value={value} onChange={onChange}>
       <div className="editor-wrapper">
         <div className="editor-toolbar">
-          <Toolbar plugins={plugins}/>
+          <Toolbar plugins={plugins} getEditorContainer={getEditorContainer}/>
         </div>
         <div className="editor-content-container editor-scroll-container">
-          <div className="editor-content">
+          <div className={classnames({
+            "editor-content": true,
+            "editor-content-painter": editor.formatStatus === 1,
+          })} ref={containerNode}>
             <Editable
               className="editor-core"
               renderElement={renderElement}

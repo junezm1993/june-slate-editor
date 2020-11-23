@@ -37,6 +37,10 @@
         padding: 20px 60px 90px 60px;
       }
     }
+
+    .editor-content-painter {
+      cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAGKADAAQAAAABAAAAGAAAAADiNXWtAAABv0lEQVRIDe2UPSiFYRTHfZavDEySQclgQ5IFJbEQWVjEqJiQUiws8rVQyGi6q8nNJlEWWdgQkyw+E4Xf/3quzn09F7eU5Z76dc75n/Pc8z7v87w3JSVp//0G0s0DjBHnwKnTVKuFdjhwWtAVIdTAPTwGi8F8GmEHQqCFYdiFSfBZK+I1bMMVVMOvbJauZ5j7oXuTerfrGcav+PrTPOIEWiaMe2pWuiO5dcINXvkX8w14cl3axXe2R7HBNTTi910c43wDYho8ic6nA7TLZleXzwddiAKnRVyqTUz8Ruyr5aJfwha8gA53FFYhC/KgCkrhFeKaBvisHFED4pneiAZrUMQyooHxiy5ewg8aXeEZ6Izk9UMyu9Nscp2FvouI+Qacu9qx89bp4HdBPcu2QKyn34DpgO5N470iNV9AiXfVx4AeW0v0FlWwWNvXEGtdNrFxogNGWLxuf4C4EIaMFrN734Ac16wraU1Xrw3WrEhcD5VOswcekYKHrIEL8ADzMADRJ2oh1g0aBmudJPrIZqAJpuDT7A50LQ9BH0wxaNERRP/0QsT6Q9POLGHXowfphRPwWh9qWaBSR94f0JLp376Bd9juSuHEZV/lAAAAAElFTkSuQmCC) 5 5, text;
+    }
   }
 }
 // 编辑器内部内容样式定义
@@ -52,4 +56,11 @@
     word-wrap: break-word;
     text-indent: 0;
   }
+}
+
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }

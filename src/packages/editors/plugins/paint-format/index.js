@@ -4,6 +4,7 @@ import {useSlate} from "slate-react";
 import {Tooltip} from "antd";
 import classnames from 'classnames';
 import {IconFont} from "../../utils/icon-font";
+import IconSelectText from '../../images/brush_ibeam_mac.png';
 
 export const paintFormatPlugin = {
   key: 'paintFormat',
@@ -11,22 +12,10 @@ export const paintFormatPlugin = {
     title: '格式刷'
   },
   withEditor: (editor) => {
-    const { onChange, insertText, isInline } = editor;
     editor.formatStatus = 0;
-    console.log(111111);
-    // editor.onChange = () => {
-    //   if (editor.formatStatus === 1) {
-    //     console.log(2222);
-    //     editor.formatStatus = 0;
-    //     Editor.addMark(editor,'bold', true);
-    //   }
-    //
-    //   onChange();
-    //
-    // }
     return editor;
   },
-  ToolbarButton: ({ format, config }) => {
+  ToolbarButton: ({ format, config, getEditorContainer }) => {
     const editor = useSlate();
     return (
       <Tooltip
@@ -40,15 +29,27 @@ export const paintFormatPlugin = {
         onMouseDown={event => {
           event.preventDefault();
           const marks = Editor.marks(editor);
-          editor.formatStatus = 1;
-          editor.recordMark = marks;
-          console.log(marks);
-          console.log(editor);
+          if (Object.keys(marks).length > 0) {
+            editor.formatStatus = 1;
+            editor.recordMark = marks;
+            getEditorContainer().style.cursor = `url(${IconSelectText}) 5 5,text`;
+          }
         }}
       >
         <IconFont format={format} />
       </div>
       </Tooltip>
     );
+  }
+};
+
+export const handlePaintFormat = ({ editor, getEditorContainer }) => {
+  const { formatStatus, recordMark } = editor;
+  if (formatStatus === 1) {
+    Object.keys(recordMark).forEach(mark => {
+      editor.addMark(mark, recordMark[mark]);
+    });
+    editor.formatStatus = 0;
+    getEditorContainer().style.cursor = `text`;
   }
 };
