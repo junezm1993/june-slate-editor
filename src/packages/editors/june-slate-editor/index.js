@@ -10,7 +10,7 @@ import Toolbar from '../toolbar';
 import { defaultPlugins } from "../consts/default-plugins";
 import { RenderElement, RenderLeaf, pluginMap } from '../plugins/index';
 import {handlePaintFormat} from "../plugins/paint-format";
-import { withBlockEditor } from '../utils/toolbar-helpers';
+import { withBlockEditor, withExtendEditor } from '../utils/toolbar-helpers';
 
 const EditorComponent = React.memo(({ className: _className, value, onChange, plugins: _plugins }) => {
   // const editor = useMemo(() => withReact(createEditor()), []);
@@ -29,7 +29,7 @@ const EditorComponent = React.memo(({ className: _className, value, onChange, pl
 
   const [className, setClassName] = useState('');
   const editor = useMemo(() => {
-    let editor = withBlockEditor(withReact(createEditor()));
+    let editor = withExtendEditor(withBlockEditor(withReact(createEditor())));
     plugins.forEach(item => {
       if (item.withEditor) {
         editor = item.withEditor(editor);

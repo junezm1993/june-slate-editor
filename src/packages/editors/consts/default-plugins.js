@@ -22,7 +22,7 @@ export const defaultPlugins = [
   'line',
   'unorderedList',
   'orderedList',
-  'block-quote',
+  'blockQuote',
   'block-code',
   'line',
   'linkEditor',

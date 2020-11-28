@@ -12,7 +12,7 @@ const WRAP_TYPES = [
     type: 'block-code'
   },
   {
-    type: 'block-quote'
+    type: 'blockQuote'
   }
 ];
 
@@ -48,7 +48,6 @@ export const toggleBlock = (editor, format) => {
     match: (n) => WRAP_TYPES.find((item) => item.type === n.type),
     split: true,
   });
-
   if (!isActive) {
     if (config) {
       Transforms.setNodes(editor, {
@@ -65,6 +64,24 @@ export const toggleBlock = (editor, format) => {
       type: 'paragraph'
     });
   }
+};
+
+export const withExtendEditor = (editor) => {
+  Editor.clearMark = (editor, key) => {
+    editor.clearMark(key);
+  };
+  editor.clearMark = (key) => {
+    let selection = editor.selection;
+    if (selection) {
+      if (Range.isExpanded(selection)) {
+        editor.removeMark(key)
+      } else {
+        editor.marks = {};
+        editor.onChange();
+      }
+    }
+  };
+  return editor;
 };
 
 export const withBlockEditor = (editor) => {

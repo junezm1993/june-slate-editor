@@ -18,6 +18,7 @@ import {AlignPlugin} from "./align";
 import {UnorderedListPlugin} from "./unordered-list";
 import {OrderedListPlugin} from "./ordered-list";
 import {LineHeightPlugin} from "./line-height";
+import {BlockQuotePlugin} from "./block-quote";
 
 // 个性化block节点
 export const RenderElement = React.memo((props) => {
@@ -45,7 +46,6 @@ export const RenderElement = React.memo((props) => {
 export const RenderLeaf = React.memo((props) => {
   let { attributes, children, leaf, plugins } = props;
   const childMark = { children, style: {} };
-  console.log(leaf);
   plugins.forEach((plugin) => {
     if (plugin.processLeaf) {
       plugin.processLeaf({ attributes, children, leaf, childMark })
@@ -78,4 +78,5 @@ export const pluginMap = {
   lineHeight: LineHeightPlugin,
   unorderedList: UnorderedListPlugin,
   orderedList: OrderedListPlugin,
+  blockQuote: BlockQuotePlugin,
 };

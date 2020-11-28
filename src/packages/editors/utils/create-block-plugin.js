@@ -1,11 +1,10 @@
-import React, { useContext } from 'react';
+import React  from 'react';
 import { isBlockActive, toggleBlock } from '../utils/toolbar-helpers.js';
-import classnames from 'classnames';
 import { useSlate } from 'slate-react';
 import {Tooltip} from "antd";
 import {IconFont} from "./icon-font";
 
-const BlockButton = React.memo(({ children, title, format, otherFormat }) => {
+const BlockButton = React.memo(({ title, format, otherFormat }) => {
   const editor = useSlate();
 
   return <Tooltip
@@ -15,6 +14,7 @@ const BlockButton = React.memo(({ children, title, format, otherFormat }) => {
     className="editor-toolbar-item"
     onMouseDown={event => {
       event.preventDefault();
+      console.log('1111111', format);
       toggleBlock(editor, format, otherFormat)
     }}
     style={{ color: isBlockActive(editor, format) ? '#1890ff' : '' }}>
@@ -36,7 +36,6 @@ export default ({ format, title, otherFormat, config, processElement, icon, with
     },
     processElement,
     withEditor: (editor) => {
-      console.log(editor);
       editor.__BLOCKS__.push(format);
       if (withEditor) {
         return withEditor(editor);
