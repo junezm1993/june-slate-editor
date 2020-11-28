@@ -17,6 +17,8 @@ import {fontSizePlugin} from "./font-size";
 import {colorPlugin} from "./color";
 import {IndentPlugin} from "./indent";
 import {AlignPlugin} from "./align";
+import {UnorderedListPlugin} from "./unordered-list";
+import {OrderedListPlugin} from "./ordered-list";
 
 // 个性化block节点
 export const RenderElement = React.memo((props) => {
@@ -48,7 +50,7 @@ export const RenderLeaf = React.memo((props) => {
     if (plugin.processLeaf) {
       plugin.processLeaf({ attributes, children, leaf, childMark })
     }
-  })
+  });
 
   if (leaf.key) {
     attributes.key = leaf.key;
@@ -72,4 +74,6 @@ export const pluginMap = {
   subscript: SubscriptPlugin,
   indent: IndentPlugin,
   align: AlignPlugin,
+  unorderedList: UnorderedListPlugin,
+  orderedList: OrderedListPlugin,
 };

@@ -19,7 +19,6 @@ const Align = React.memo(({ config, format }) => {
   const onClick = ({ key, domEvent }) => {
     domEvent.preventDefault();
     domEvent.nativeEvent.preventDefault();
-    console.log(key);
     Transforms.setNodes(editor, {
       align: key
     });

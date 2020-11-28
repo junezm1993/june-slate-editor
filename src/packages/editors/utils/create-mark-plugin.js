@@ -63,7 +63,7 @@ const MarkButton = React.memo(({ format, title }) => {
   </Tooltip>
 });
 
-export default ({ format, title, otherFormat, config, processLeaf }) => {
+export default ({ format, title, config, processLeaf }) => {
   config = config || {};
   config.title = title;
   config.key = format;
