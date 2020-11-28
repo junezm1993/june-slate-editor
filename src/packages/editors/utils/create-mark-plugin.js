@@ -5,12 +5,10 @@ import {
   BoldOutlined,
   CodeOutlined,
   ItalicOutlined,
-  QuestionOutlined,
   StrikethroughOutlined,
   UnderlineOutlined,
-  createFromIconfontCN,
 } from "@ant-design/icons";
-import React, {useMemo} from "react";
+import React from "react";
 import {Tooltip} from "antd";
 import { IconFont } from '../utils/icon-font';
 
@@ -43,14 +41,10 @@ const MarkButton = React.memo(({ format, title }) => {
         return <UnderlineOutlined />;
       case STRIKETHROUGH_TYPE:
         return <StrikethroughOutlined />;
-      case SUPERSCRIPT_TYPE:
-        return <IconFont type="slate-shangbiao" />;
-      case SUBSCRIPT_TYPE:
-        return <IconFont type="slate-xiabiao" />;
       case CODE_TYPE:
         return <CodeOutlined />;
       default:
-        return <QuestionOutlined />;
+        return <IconFont format={props.format} />;
     }
   }
 
