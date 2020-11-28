@@ -15,6 +15,7 @@ import {paintFormatPlugin} from "./paint-format";
 import {headingPlugin} from "./heading";
 import {fontSizePlugin} from "./font-size";
 import {colorPlugin} from "./color";
+import {IndentPlugin} from "./indent";
 
 // 个性化block节点
 export const RenderElement = React.memo((props) => {
@@ -68,4 +69,5 @@ export const pluginMap = {
   strikethrough: StrikethroughPlugin,
   superscript: SuperscriptPlugin,
   subscript: SubscriptPlugin,
+  indent: IndentPlugin,
 };
