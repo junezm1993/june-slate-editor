@@ -1,14 +1,10 @@
-import { HISTORY } from "./plugin-types";
-
 export const defaultPlugins = [
-  HISTORY,
+  'history',
   'paintFormat',
   'removeFormat',
   'line',
   'headings',
   'fontSize',
-  'lineHeight',
-  'letterSpacing',
   'line',
   'color',
   'bold',
@@ -22,6 +18,7 @@ export const defaultPlugins = [
   'line',
   'indent',
   'align',
+  'lineHeight',
   'line',
   'unorderedList',
   'orderedList',

@@ -2,10 +2,7 @@ import React from 'react'
 
 import { BoldPlugin } from './bold';
 import { ItalicPlugin } from './italic';
-import { HISTORY, PARAGRAPH, H1, H2, H3, H4, H5, H6 } from './plugin-types';
-
-import historyPlugin from './history';
-
+import { historyPlugin } from './history';
 import {UnderlinePlugin} from "./underlined";
 import {StrikethroughPlugin} from "./strikethrough";
 import {SuperscriptPlugin} from "./superscript";
@@ -20,6 +17,7 @@ import {IndentPlugin} from "./indent";
 import {AlignPlugin} from "./align";
 import {UnorderedListPlugin} from "./unordered-list";
 import {OrderedListPlugin} from "./ordered-list";
+import {LineHeightPlugin} from "./line-height";
 
 // 个性化block节点
 export const RenderElement = React.memo((props) => {
@@ -46,7 +44,8 @@ export const RenderElement = React.memo((props) => {
 // 个性化 leaf 节点
 export const RenderLeaf = React.memo((props) => {
   let { attributes, children, leaf, plugins } = props;
-  const childMark = { children, style: {fontSize: '20'} };
+  const childMark = { children, style: {} };
+  console.log(leaf);
   plugins.forEach((plugin) => {
     if (plugin.processLeaf) {
       plugin.processLeaf({ attributes, children, leaf, childMark })
@@ -61,7 +60,7 @@ export const RenderLeaf = React.memo((props) => {
 
 // plugin map
 export const pluginMap = {
-  [HISTORY]: historyPlugin,
+  history: historyPlugin,
   paintFormat: paintFormatPlugin,
   removeFormat: removeFormatPlugin,
   headings: headingPlugin,
@@ -76,6 +75,7 @@ export const pluginMap = {
   inlineCode: InlineCodePlugin,
   indent: IndentPlugin,
   align: AlignPlugin,
+  lineHeight: LineHeightPlugin,
   unorderedList: UnorderedListPlugin,
   orderedList: OrderedListPlugin,
 };
