@@ -10,7 +10,7 @@ export const defaultPlugins = [
   'lineHeight',
   'letterSpacing',
   'line',
-  'textColor',
+  'color',
   'bold',
   'italic',
   'underline',

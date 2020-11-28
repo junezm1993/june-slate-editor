@@ -14,6 +14,7 @@ import {removeFormatPlugin} from "./remove-format";
 import {paintFormatPlugin} from "./paint-format";
 import {headingPlugin} from "./heading";
 import {fontSizePlugin} from "./font-size";
+import {colorPlugin} from "./color";
 
 // 个性化block节点
 export const RenderElement = React.memo((props) => {
@@ -60,6 +61,7 @@ export const pluginMap = {
   removeFormat: removeFormatPlugin,
   headings: headingPlugin,
   fontSize: fontSizePlugin,
+  color: colorPlugin,
   bold: BoldPlugin,
   italic: ItalicPlugin,
   underline: UnderlinePlugin,
