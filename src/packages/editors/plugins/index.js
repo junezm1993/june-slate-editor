@@ -1,107 +1,84 @@
 import React from 'react'
-import { CodeElement, CodeLeaf } from './inline-code';
-import { BoldElement, BoldLeaf,  } from './bold';
-import { ItalicElement, ItalicLeaf } from './italic';
-import { HISTORY, PARAGRAPH, H1, H2, H3, H4, H5, H6 } from './plugin-types';
+
+import { BoldPlugin } from './bold';
+import { ItalicPlugin } from './italic';
+import { historyPlugin } from './history';
+import {UnderlinePlugin} from "./underlined";
+import {StrikethroughPlugin} from "./strikethrough";
+import {SuperscriptPlugin} from "./superscript";
+import {SubscriptPlugin} from "./subscript";
+import {InlineCodePlugin} from './inline-code';
+import {removeFormatPlugin} from "./remove-format";
+import {paintFormatPlugin} from "./paint-format";
+import {headingPlugin} from "./heading";
+import {fontSizePlugin} from "./font-size";
+import {colorPlugin} from "./color";
+import {IndentPlugin} from "./indent";
+import {AlignPlugin} from "./align";
+import {UnorderedListPlugin} from "./unordered-list";
+import {OrderedListPlugin} from "./ordered-list";
+import {LineHeightPlugin} from "./line-height";
+import {BlockQuotePlugin} from "./block-quote";
+import {linkPlugin} from "./link";
 
 // 个性化block节点
-export const RenderElement = (props) => {
+export const RenderElement = React.memo((props) => {
   const {
-    attributes, children, element, customElements
+    editor, attributes, children, element, customElements, plugins
   } = props;
-  const { type, data } = element;
-  console.log(customElements);
-  const baseElementRenderer = {
-    [PARAGRAPH]: () => (<p {...attributes}>{children}</p>),
-    [H1]: () => (<h1 {...attributes}>{children}</h1>),
-    [H2]: () => (<h2 {...attributes}>{children}</h2>),
-    [H3]: () => (<h3 {...attributes}>{children}</h3>),
-    [H4]: () => (<h4 {...attributes}>{children}</h4>),
-    [H5]: () => (<h5 {...attributes}>{children}</h5>),
-    [H6]: () => (<h6 {...attributes}>{children}</h6>),
-    default: () => {
-      console.log(`Didn't know how to render ${JSON.stringify(element, null, 2)}`);
-      return <p {...attributes}>{children}</p>;
+  attributes.style = attributes.style || {};
+  let block, plugin;
+
+  for (let i = 0; i < plugins.length; i++) {
+    plugin = plugins[i];
+    // 如果有个性化的block逻辑
+    if (plugin.processElement) {
+      block = plugin.processElement({ editor, attributes, children, element });
+      if(block) {
+        return block;
+      }
     }
-  };
+  }
+  // 默认 block 元素
+  return <p {...attributes}>{children}</p>;
+});
 
-  const elementRenderer = customElements
-    ? { ...baseElementRenderer, ...customElements(attributes, children, element) }
-    : baseElementRenderer;
+// 个性化 leaf 节点
+export const RenderLeaf = React.memo((props) => {
+  let { attributes, children, leaf, plugins } = props;
+  const childMark = { children, style: {} };
+  plugins.forEach((plugin) => {
+    if (plugin.processLeaf) {
+      plugin.processLeaf({ attributes, children, leaf, childMark })
+    }
+  });
 
-  return (elementRenderer[type] || elementRenderer.default)();
+  if (leaf.key) {
+    attributes.key = leaf.key;
+  }
+  return <span {...attributes} style={childMark.style}>{childMark.children}</span>;
+});
+
+// plugin map
+export const pluginMap = {
+  history: historyPlugin,
+  paintFormat: paintFormatPlugin,
+  removeFormat: removeFormatPlugin,
+  headings: headingPlugin,
+  fontSize: fontSizePlugin,
+  color: colorPlugin,
+  bold: BoldPlugin,
+  italic: ItalicPlugin,
+  underline: UnderlinePlugin,
+  strikethrough: StrikethroughPlugin,
+  superscript: SuperscriptPlugin,
+  subscript: SubscriptPlugin,
+  inlineCode: InlineCodePlugin,
+  indent: IndentPlugin,
+  align: AlignPlugin,
+  lineHeight: LineHeightPlugin,
+  unorderedList: UnorderedListPlugin,
+  orderedList: OrderedListPlugin,
+  blockQuote: BlockQuotePlugin,
+  link: linkPlugin,
 };
-
-const DefaultElement = props => {
-  return <p {...props.attributes}>{props.children}</p>
-};
-
-// 个性化leaf节点
-export const RenderLeaf = (props) => {
-  let { attributes, children, leaf } =  props;
-  // 加粗
-  if (leaf.bold) {
-    children = <strong>{children}</strong>
-  }
-  // 斜体
-  if (leaf.italic) {
-    children = <em>{children}</em>
-  }
-  // 中划线
-  if (leaf.strikethrough) {
-    children = <del>{children}</del>
-  }
-  // 下划线
-  if (leaf.underline) {
-    children = <u>{children}</u>
-  }
-  // 行内代码
-  if (leaf.code) {
-    children = <code>{children}</code>
-  }
-
-  return <span {...attributes}>{children}</span>
-};
-
-const DefaultLeaf = props => {
-  return <span {...props.attributes}>
-        {props.children}
-    </span>
-};
-
-export const defaultPlugins = [
-  HISTORY,
-  'line',
-  'fontSize',
-  'lineHeight',
-  'letterSpacing',
-  'line',
-  'textColor',
-  'bold',
-  'italic',
-  'underlined',
-  'strikethrough',
-  'line',
-  'superscript',
-  'subscript',
-  'format-clear',
-  'line',
-  'indent',
-  'align',
-  'line',
-  'headings',
-  'bulleted-list',
-  'numbered-list',
-  'block-quote',
-  'block-code',
-  'line',
-  'linkEditor',
-  'hr',
-  'clear-all',
-  'line',
-  'fullscreen'
-];
-
-const pluginMap = {
-  [HISTORY]: 1
-}
