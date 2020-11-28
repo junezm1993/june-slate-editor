@@ -16,6 +16,7 @@ import {headingPlugin} from "./heading";
 import {fontSizePlugin} from "./font-size";
 import {colorPlugin} from "./color";
 import {IndentPlugin} from "./indent";
+import {AlignPlugin} from "./align";
 
 // 个性化block节点
 export const RenderElement = React.memo((props) => {
@@ -70,4 +71,5 @@ export const pluginMap = {
   superscript: SuperscriptPlugin,
   subscript: SubscriptPlugin,
   indent: IndentPlugin,
+  align: AlignPlugin,
 };
