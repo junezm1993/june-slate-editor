@@ -18,6 +18,7 @@ export const defaultPlugins = [
   'line',
   'superscript',
   'subscript',
+  'inlineCode',
   'line',
   'indent',
   'align',

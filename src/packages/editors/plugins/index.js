@@ -1,5 +1,5 @@
 import React from 'react'
-import { CodeElement, CodeLeaf } from './inline-code';
+
 import { BoldPlugin } from './bold';
 import { ItalicPlugin } from './italic';
 import { HISTORY, PARAGRAPH, H1, H2, H3, H4, H5, H6 } from './plugin-types';
@@ -10,6 +10,7 @@ import {UnderlinePlugin} from "./underlined";
 import {StrikethroughPlugin} from "./strikethrough";
 import {SuperscriptPlugin} from "./superscript";
 import {SubscriptPlugin} from "./subscript";
+import {InlineCodePlugin} from './inline-code';
 import {removeFormatPlugin} from "./remove-format";
 import {paintFormatPlugin} from "./paint-format";
 import {headingPlugin} from "./heading";
@@ -72,6 +73,7 @@ export const pluginMap = {
   strikethrough: StrikethroughPlugin,
   superscript: SuperscriptPlugin,
   subscript: SubscriptPlugin,
+  inlineCode: InlineCodePlugin,
   indent: IndentPlugin,
   align: AlignPlugin,
   unorderedList: UnorderedListPlugin,

@@ -1,6 +1,5 @@
 import {useSlate} from "slate-react";
-import {Editor} from "slate";
-import {BOLD_TYPE, CODE_TYPE, ITALIC_TYPE, STRIKETHROUGH_TYPE, UNDERLINE_TYPE, SUPERSCRIPT_TYPE, SUBSCRIPT_TYPE} from "../plugins/plugin-types";
+import {BOLD_TYPE, CODE_TYPE, ITALIC_TYPE, STRIKETHROUGH_TYPE, UNDERLINE_TYPE } from "../plugins/plugin-types";
 import {
   BoldOutlined,
   CodeOutlined,
@@ -11,25 +10,12 @@ import {
 import React from "react";
 import {Tooltip} from "antd";
 import { IconFont } from '../utils/icon-font';
+import { isMarkActive,toggleMark } from "./toolbar-helpers";
 
 const MarkButton = React.memo(({ format, title }) => {
   const editor = useSlate();
   // mark是否激活
-  const isMarkActive = (editor, format) => {
-    const marks = Editor.marks(editor);
-    return marks ? marks[format] === true : false
-  };
   const isActive = isMarkActive(editor, format);
-
-  // 切换mark
-  const toggleMark = (editor, format) => {
-    const isActive = isMarkActive(editor, format);
-    if (isActive) {
-      Editor.removeMark(editor, format);
-    } else {
-      Editor.addMark(editor, format, true);
-    }
-  };
   // mark buttons
   function SwitchIcon(props) {
     switch(props.format) {
@@ -48,18 +34,16 @@ const MarkButton = React.memo(({ format, title }) => {
     }
   }
 
-  return <Tooltip
-    placement="bottom"
-    title={title}
-  ><div
-    className="editor-toolbar-item"
-    onMouseDown={event => {
-      event.preventDefault();
-      toggleMark(editor, format)
-    }}
-    style={{ color: isActive ? '#1890ff' : '' }}>
-    <SwitchIcon format={format} />
-  </div>
+  return <Tooltip placement="bottom" title={title}>
+    <div
+      className="editor-toolbar-item"
+      onMouseDown={event => {
+        event.preventDefault();
+        toggleMark(editor, format)
+      }}
+      style={{ color: isActive ? '#1890ff' : '' }}>
+      <SwitchIcon format={format} />
+    </div>
   </Tooltip>
 });
 
