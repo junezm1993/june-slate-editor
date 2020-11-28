@@ -19,11 +19,12 @@ import {UnorderedListPlugin} from "./unordered-list";
 import {OrderedListPlugin} from "./ordered-list";
 import {LineHeightPlugin} from "./line-height";
 import {BlockQuotePlugin} from "./block-quote";
+import {linkPlugin} from "./link";
 
 // 个性化block节点
 export const RenderElement = React.memo((props) => {
   const {
-    attributes, children, element, customElements, plugins
+    editor, attributes, children, element, customElements, plugins
   } = props;
   attributes.style = attributes.style || {};
   let block, plugin;
@@ -32,7 +33,7 @@ export const RenderElement = React.memo((props) => {
     plugin = plugins[i];
     // 如果有个性化的block逻辑
     if (plugin.processElement) {
-      block = plugin.processElement({ attributes, children, element });
+      block = plugin.processElement({ editor, attributes, children, element });
       if(block) {
         return block;
       }
@@ -79,4 +80,5 @@ export const pluginMap = {
   unorderedList: UnorderedListPlugin,
   orderedList: OrderedListPlugin,
   blockQuote: BlockQuotePlugin,
+  link: linkPlugin,
 };

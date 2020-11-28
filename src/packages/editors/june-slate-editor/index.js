@@ -49,7 +49,7 @@ const EditorComponent = React.memo(({ className: _className, value, onChange, pl
     return editor;
   }, []);
 
-  const renderElement = useCallback(props => <RenderElement {...props} plugins={plugins}/>, [])
+  const renderElement = useCallback(props => <RenderElement {...props} plugins={plugins} editor={editor}/>, [])
   const renderLeaf = useCallback(props => <RenderLeaf {...props} plugins={plugins}/>, [])
   // 格式刷的函数
   const handleMouseUp = useCallback(() => handlePaintFormat({ editor, getEditorContainer}), []);

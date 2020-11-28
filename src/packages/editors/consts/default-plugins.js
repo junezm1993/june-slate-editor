@@ -25,7 +25,7 @@ export const defaultPlugins = [
   'blockQuote',
   'block-code',
   'line',
-  'linkEditor',
+  'link',
   'hr',
   'clear-all',
   'line',
