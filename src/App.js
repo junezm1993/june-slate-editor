@@ -6,11 +6,11 @@ function App() {
   const [value, setValue] = useState([
     {
       type: 'paragraph',
-      children: [{ text: 'abccccccccc' }]
+      children: [{ text: 'welcome june-slate-editor' }]
     },
     {
       type: 'paragraph',
-      children: [{ text: 'abcefghijklmn' }]
+      children: [{ text: 'this is demo' }]
     }
   ]);
   const onChange = useCallback(function (val) {
