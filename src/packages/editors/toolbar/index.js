@@ -13,6 +13,7 @@ export default React.memo(({ getEditorContainer, plugins }) => {
           if (typeof plugin === 'string' && plugin !== 'line') {
           return null;
         }
+        console.log(plugin);
         return <plugin.ToolbarButton key={plugin.key} config={plugin.config} format={plugin.key} getEditorContainer={getEditorContainer}/>;
       })
     }

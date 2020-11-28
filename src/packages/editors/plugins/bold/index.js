@@ -18,4 +18,4 @@ export const BoldPlugin = createMarkPlugin({
       // childMark.style.fontWeight = 'bold';
     }
   }
-})
+});

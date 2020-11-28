@@ -6,7 +6,7 @@ function App() {
   const [value, setValue] = useState([
     {
       type: 'paragraph',
-      children: [{ text: 'abc' }]
+      children: [{ text: 'abccccccccc' }]
     },
     {
       type: 'paragraph',

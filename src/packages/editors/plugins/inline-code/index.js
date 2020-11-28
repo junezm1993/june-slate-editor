@@ -46,7 +46,6 @@ const styles = {
   textIndent: 0
 }
 export const CodeLeaf = props => {
-  console.log(props.children)
   return (
       <code
           {...props.attributes}

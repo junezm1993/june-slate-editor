@@ -9,4 +9,4 @@ export const UnderlinePlugin = createMarkPlugin({
       childMark.children = <u>{childMark.children}</u>;
     }
   }
-})
+});

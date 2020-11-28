@@ -12,6 +12,8 @@ import {SuperscriptPlugin} from "./superscript";
 import {SubscriptPlugin} from "./subscript";
 import {removeFormatPlugin} from "./remove-format";
 import {paintFormatPlugin} from "./paint-format";
+import {headingPlugin} from "./heading";
+import {fontSizePlugin} from "./font-size";
 
 // 个性化block节点
 export const RenderElement = React.memo((props) => {
@@ -33,12 +35,12 @@ export const RenderElement = React.memo((props) => {
   }
   // 默认 block 元素
   return <p {...attributes}>{children}</p>;
-})
+});
 
 // 个性化 leaf 节点
 export const RenderLeaf = React.memo((props) => {
   let { attributes, children, leaf, plugins } = props;
-  const childMark = { children, style: {} }
+  const childMark = { children, style: {fontSize: '20'} };
   plugins.forEach((plugin) => {
     if (plugin.processLeaf) {
       plugin.processLeaf({ attributes, children, leaf, childMark })
@@ -56,6 +58,8 @@ export const pluginMap = {
   [HISTORY]: historyPlugin,
   paintFormat: paintFormatPlugin,
   removeFormat: removeFormatPlugin,
+  headings: headingPlugin,
+  fontSize: fontSizePlugin,
   bold: BoldPlugin,
   italic: ItalicPlugin,
   underline: UnderlinePlugin,

@@ -13,7 +13,7 @@ import {handlePaintFormat} from "../plugins/paint-format";
 
 const EditorComponent = React.memo(({ className: _className, value, onChange, plugins: _plugins }) => {
   // const editor = useMemo(() => withReact(createEditor()), []);
-
+  // 插件map初始化
   const plugins = useMemo(() => {
     return _plugins.map((item) => {
       if (typeof item === 'string') {
@@ -89,6 +89,6 @@ EditorComponent.prototype = {
   plugins: PropTypes.array,
   value: PropTypes.string,
   onChange: PropTypes.func,
-}
+};
 
 export default EditorComponent;
