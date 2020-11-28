@@ -14,7 +14,6 @@ const BlockButton = React.memo(({ title, format, otherFormat }) => {
     className="editor-toolbar-item"
     onMouseDown={event => {
       event.preventDefault();
-      console.log('1111111', format);
       toggleBlock(editor, format, otherFormat)
     }}
     style={{ color: isBlockActive(editor, format) ? '#1890ff' : '' }}>

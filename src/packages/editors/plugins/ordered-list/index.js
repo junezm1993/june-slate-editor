@@ -5,7 +5,6 @@ export const OrderedListPlugin = createBlockPlugin({
   format: 'orderedList',
   title: '有序列表',
   processElement: ({ attributes, children, element }) => {
-    console.log(element);
     if (element.type === 'orderedList') {
       return <ol {...attributes}>{children}</ol>;
     }

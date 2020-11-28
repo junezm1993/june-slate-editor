@@ -5,7 +5,6 @@ export const BlockQuotePlugin = createBlockPlugin({
   format: 'blockQuote',
   title: '插入引用',
   processElement: ({ attributes, children, element }) => {
-    console.log(element);
     if (element.type === 'blockQuote') {
       return <blockquote {...attributes}>{children}</blockquote>;
     }

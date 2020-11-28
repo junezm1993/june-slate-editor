@@ -45,7 +45,6 @@ export const LineHeightPlugin = {
   },
   ToolbarButton: LineHeight,
   processLeaf({ leaf, childMark }) {
-    console.log('----', leaf);
     if (leaf.lineHeight) {
       childMark.style.lineHeight = leaf.lineHeight;
     }
