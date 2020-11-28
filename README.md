@@ -2,9 +2,8 @@
 基于React、Slate.js和Antd的开箱即用富文本编辑器
 ![note](editor-demo.jpg)
 
-```
 | 名称 | 功能 |
-| - | - |
+| --- | --- |
 | undo | 撤销 |
 | redo | 重做 |
 | heading | 标题 |
@@ -22,3 +21,6 @@
 | lineHeight | 行高 |
 | unorderedlist | 无序列表 |
 | orderedlist | 有序列表 |
+| blockQuote | 引用 |
+| link | 链接 |
+
