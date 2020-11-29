@@ -60,6 +60,6 @@
     "@storybook/react": "^6.1.0-beta.2",
     "@storybook/storybook-deployer": "^2.8.7",
     "babel-loader": "^8.1.0",
-    "node-sass": "4.9.4"
+    "node-sass": "4.12.0"
   }
 }
